@@ -5,13 +5,19 @@ import arrow from '../../assets/arrow-down.svg'
 import searchWt from '../../assets/search.svg'
 import addBtn from '../../assets/addButton.png'
 import './Navbar.css'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { open } from '../../Redux/ModalSlice'
+import { openSell } from '../../Redux/SellModal'
+import { logoutUser } from "../../Redux/AuthSlice"
+import { Link } from 'react-router-dom'
 
 // import {useAuthState} from 'react-firebase-hooks/auth'
 // import { auth } from '../Firebase/Firebase'
 function Navbar() {
     const dispatch =useDispatch()
+    const user=useSelector(state=>state.auth.user)
+    console.log("USER FROM REDUX:", user)
+
   return (
     <div>
     <nav className="fixed z-50 w-full flex items-center gap-4 p-2 shadow-md bg-slate-100 border-b-4 border-white">
@@ -43,9 +49,34 @@ function Navbar() {
                     <img src={arrow} alt="" className='w-5 cursor-pointer' />
                 </div>
 
-                 <p onClick={()=>{dispatch(open())}}  className='font-bold underline ml-5 cursor-pointer' style={{color: '#002f34'}}>Login</p>
+                    {user ? (
+                    <div className="flex items-center gap-3">
+                        <Link to="/profile">
+                        <span className="px-3 py-1 bg-teal-100 text-teal-800 font-semibold rounded-full shadow-sm">
+                        {user.name ? user.name.slice(0, 5) + (user.name.length > 5 ? "..." : "") : user.email}
+                        
+                        </span></Link>
+
+                        <button 
+                        onClick={() => dispatch(logoutUser())}
+                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition duration-200"
+                        >
+                        Logout
+                        </button>
+                    </div>
+                    ) : (
+                    <p 
+                        onClick={() => dispatch(open())}  
+                        className="font-bold underline ml-5 cursor-pointer text-teal-800 hover:text-teal-600 transition duration-200"
+                    >
+                        Login
+                    </p>
+                    )}
+
                 <br />
-                <p>Sell</p>
+                <p onClick={()=>{dispatch(openSell())}} className='font-bold underline ml-5 cursor-pointer' style={{color: '#002f34'}}>Sell</p>
+                <br />
+                <Link to='/cart' className='font-bold underline ml-5 cursor-pointer' style={{color: '#002f34'}}>Cart</Link>
         </nav>
     </div>
   )

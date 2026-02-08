@@ -1,22 +1,19 @@
-import React, { useState } from 'react'
-import Navbar from './Navbar'
+import React from 'react'
 import Login from '../Modal/Login'
+import Sell from '../Modal/Sell'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorFallback from '../ErrorBoundary/ErrorFallback'
+import Card from '../../Card/Card'
 
 function Home() {
-
   return (
     <div>
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Navbar />
-        </ErrorBoundary>
+      <Login />
+      <Sell />
 
-
-            <Login />
-
-        
-      
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Card />
+      </ErrorBoundary>
     </div>
   )
 }
