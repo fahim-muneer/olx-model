@@ -16,7 +16,6 @@ function SellRHF() {
   const [image, setImage] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
-  // Initialize React Hook Form
   const {
     register,
     handleSubmit,
@@ -24,7 +23,6 @@ function SellRHF() {
     reset,
   } = useForm();
 
-  // Upload image to Cloudinary
   const uploadImageToCloudinary = async () => {
     const formData = new FormData();
     formData.append("file", image);
@@ -96,7 +94,6 @@ function SellRHF() {
         <p className="font-bold text-lg mb-3">Sell Item</p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-          {/* Title */}
           <input
             {...register("title", { required: "Title is required" })}
             placeholder="Title"
@@ -106,7 +103,6 @@ function SellRHF() {
             <p className="text-red-500 text-sm">{errors.title.message}</p>
           )}
 
-          {/* Category */}
           <input
             {...register("category", { required: "Category is required" })}
             placeholder="Category"
@@ -116,7 +112,6 @@ function SellRHF() {
             <p className="text-red-500 text-sm">{errors.category.message}</p>
           )}
 
-          {/* Price */}
           <input
             type="number"
             {...register("price", {
