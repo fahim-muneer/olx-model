@@ -9,14 +9,14 @@ import Profile from './components/pages/Profile'
 import Login from './components/Modal/Login'
 import Sell from './components/Modal/Sell'
 import Protected from './components/ProtectRoute/Protected'
-// =====================
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./components/Firebase/Firebase";
 import { setUser } from "./Redux/AuthSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 function App() {
-    const dispatch = useDispatch();
+  const mode = useSelector(state => state.theme.mode);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -35,7 +35,9 @@ function App() {
 
   return (
     <div>
-     
+         <div className={mode === "dark" ? "dark" : ""}>
+            <div className="bg-white dark:bg-[#0f172a] min-h-screen text-black dark:text-white">
+
       <Navbar/>
       <Login />
       <Sell />
@@ -52,6 +54,8 @@ function App() {
         
 
       </Routes>
+          </div>
+        </div>
       </div>
     </div>
   )

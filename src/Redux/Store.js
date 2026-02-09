@@ -4,6 +4,7 @@ import authReducer from "./AuthSlice";
 import sellModal from "./SellModal"
 import itemReducer from "./Items"
 import cartReducer from "./CartSlice";
+import themeReducer from "./TheamSlice"
 const Store=configureStore({
     reducer:{
         modal:moduleReducer,
@@ -11,6 +12,7 @@ const Store=configureStore({
         sell:sellModal,
         item:itemReducer,
         cart:cartReducer,
+        theme:themeReducer
         
         
         

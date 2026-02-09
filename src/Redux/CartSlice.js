@@ -10,16 +10,19 @@ const CartSlice = createSlice({
       const exists = state.items.find(i => i.id === action.payload.id);
       if (!exists) {
         state.items.push(action.payload);
+        alert(("Prodict added to the Cart!!"))
         
       }
     },
 
     removeFromCart: (state, action) => {
       state.items = state.items.filter(i => i.id !== action.payload);
+      alert("Product removed")
     },
 
     clearCart: (state) => {
       state.items = [];
+      alert("Cart cleared.")
     }
   }
 });
