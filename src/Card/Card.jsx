@@ -6,11 +6,13 @@ import favorite from '../assets/favorite.svg'
 import { addToCart } from '../Redux/CartSlice';
 import AddCartButton from '../Button/AddCartButton';
 import RefreshButton from '../Button/RefreshButton';
+import LoginRequiredButton from '../Button/LoginRequiredButton';
 
 
 const Card = () => {
     const dispatch = useDispatch();
     const { items, loading } = useSelector(state => state.item);
+    const user=useSelector(state=>state.auth.user)
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -78,8 +80,8 @@ const Card = () => {
                           rounded-full top-3 right-3 cursor-pointer'>
             <img className='w-5' src={favorite} alt="" />
           </div>
-
-          <AddCartButton item={item} />
+{user ?<AddCartButton item={item} />:<LoginRequiredButton/> }
+          
 
         </div>
       ))}
